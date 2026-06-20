@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RecrutaBot</title>
+    <script>
+      // SPA fallback for GitHub Pages. The app uses hash routing, so any deep
+      // path is redirected back to the app root (preserving the project base
+      // path, i.e. the first segment for a project site like /<repo>/).
+      (function () {
+        var segs = location.pathname.split("/").filter(Boolean);
+        var base = segs.length > 0 ? "/" + segs[0] + "/" : "/";
+        location.replace(base + location.hash);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

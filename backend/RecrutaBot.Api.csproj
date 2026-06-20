@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>RecrutaBot.Api</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- DOCX generation over the marked Hays template -->
+    <PackageReference Include="DocxTemplater" Version="2.7.3" />
+    <!-- Text extraction -->
+    <PackageReference Include="PdfPig" Version="0.1.14" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.1.0" />
+    <!-- Supabase JWT validation (JWKS) -->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Ship the marked template inside the published app / container image -->
+    <None Include="Templates\Hays_Template_marked.docx" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
