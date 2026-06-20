@@ -14,7 +14,7 @@ com prefixo `c`): placeholders `{{c.nome}}`, `{{c.segmento}}`, …; loop de expe
 Estilos, tema, fontes e tabelas pontilhadas são preservados do modelo original —
 saída fiel ao Hays, só os valores mudam.
 
-## Regerar
+## Regenerar
 ```bash
 python3 mark_template.py ../project/assets/Hays_Template.docx Hays_Template_marked.docx
 cp Hays_Template_marked.docx ../backend/Templates/

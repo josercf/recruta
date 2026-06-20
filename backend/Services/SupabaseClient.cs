@@ -144,7 +144,12 @@ public sealed class SupabaseClient
         await EnsureOk(res, "sign url");
         using var doc = JsonDocument.Parse(await res.Content.ReadAsStringAsync(ct));
         var signed = doc.RootElement.GetProperty("signedURL").GetString()!;
-        // PostgREST returns a path relative to /storage/v1
+        if (Uri.IsWellFormedUriString(signed, UriKind.Absolute))
+            return signed;
+        if (!signed.StartsWith('/'))
+            signed = "/" + signed;
+        if (signed.StartsWith("/storage/v1/", StringComparison.Ordinal))
+            return $"{_url}{signed}";
         return $"{_url}/storage/v1{signed}";
     }
 

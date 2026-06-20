@@ -82,6 +82,7 @@ export function watchJob(jobId, onChange) {
 /** Download a generated DOCX from a (signed) URL with a friendly filename. */
 export async function downloadFromUrl(url, name) {
   const res = await fetch(url);
+  if (!res.ok) throw new Error(`download failed: ${res.status}`);
   const blob = await res.blob();
   const objUrl = URL.createObjectURL(blob);
   const a = document.createElement("a");

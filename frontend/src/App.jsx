@@ -137,7 +137,7 @@ export default function App() {
         <nav className="tb-nav">
           <button
             className={"navitem" + (["upload", "processing", "review", "preview"].includes(screen) ? " active" : "")}
-            onClick={() => { setData((d) => d); navigate("upload"); }}
+            onClick={() => { navigate("upload"); }}
           >
             + {T.navUpload}
           </button>

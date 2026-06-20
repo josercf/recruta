@@ -107,8 +107,17 @@ app.MapPost("/api/parse", async (HttpRequest req, SupabaseClient supabase, Claim
         : "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
     await supabase.UploadAsync(storagePath, bytes, contentType, ct);
 
-    var jobId = await supabase.CreateJobAsync(userId, JobType.Parse,
-        new { fileName = name, storagePath }, ct);
+    Guid jobId;
+    try
+    {
+        jobId = await supabase.CreateJobAsync(userId, JobType.Parse,
+            new { fileName = name, storagePath }, ct);
+    }
+    catch
+    {
+        try { await supabase.DeleteAsync(storagePath, ct); } catch { }
+        throw;
+    }
 
     return Results.Accepted($"/api/jobs/{jobId}", new { jobId });
 }).RequireAuthorization();

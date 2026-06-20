@@ -48,8 +48,11 @@ SIMPLE = {
 
 def transform(xml: str) -> str:
     # 1) Formação: loop {#formacao}{.}{/formacao} -> campo único {{c.formacao}}
-    a = xml.index("{#formacao}")
-    b = xml.index("{/formacao}") + len("{/formacao}")
+    a = xml.find("{#formacao}")
+    b0 = xml.find("{/formacao}")
+    if a < 0 or b0 < 0 or b0 < a:
+        raise ValueError("Template inválido: região {#formacao}...{/formacao} não encontrada.")
+    b = b0 + len("{/formacao}")
     region = xml[a:b]
     region = region.replace("{#formacao}", "")
     region = region.replace("{.}", "{{%sformacao}}" % P, 1)
